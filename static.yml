@@ -1,0 +1,39 @@
+# This workflow deploys a static site to GitHub Pages.
+# It is typically used for single-page applications (SPAs) or static site generators.
+
+name: Deploy Static Site to GitHub Pages
+
+on:
+  push:
+    branches:
+      - main # or 'master' - adjust this to your default branch name
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4 # Use v4 for better security and features
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4 # Use v4 for Node.js setup
+        with:
+          node-version: '18' # Specify the Node.js version you need (e.g., '14', '16', '18', '20')
+          cache: 'npm' # or 'yarn', 'pnpm' - choose your package manager
+
+      - name: Install dependencies
+        run: npm install # or 'yarn install', 'pnpm install'
+
+      - name: Build static site
+        run: npm run build # This command typically runs your build script (e.g., 'react-scripts build', 'next build', 'hugo', 'jekyll build')
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v4 # Use v4 for the latest version of this action
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build # Adjust this to the directory where your static site is built (e.g., './dist', './public')
+          # cname: example.com # Uncomment and replace with your custom domain if you have one
+          # publish_branch: gh-pages # Default is gh-pages, change if you deploy to a different branch
+          # user_name: 'github-actions[bot]' # Optional: Set a custom commit author name
+          # user_email: 'github-actions[bot]@users.noreply.github.com' # Optional: Set a custom commit author email
