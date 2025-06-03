@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CoreDraft Studio</title>
+    <!-- Content Security Policy (CSP) -->
+    <!-- This policy helps mitigate Cross-Site Scripting (XSS) and other code injection attacks. -->
+    <!-- 'self': Allows resources from the same origin as the document. -->
+    <!-- https://cdn.tailwindcss.com: Allows Tailwind CSS from its CDN. -->
+    <!-- https://fonts.googleapis.com: Allows Google Fonts stylesheets. -->
+    <!-- https://fonts.gstatic.com: Allows Google Fonts font files. -->
+    <!-- 'unsafe-inline': Required for inline <style> blocks and 'onclick' attributes. -->
+    <!-- data:: Allows data URIs for images (if any are used). -->
+    <!-- mailto:: Allows mailto: links for email contact. -->
+    <!-- frame-ancestors 'none': Prevents the page from being embedded in iframes on other sites (clickjacking protection). -->
     <meta http-equiv="Content-Security-Policy" content="
         default-src 'self';
         script-src 'self' https://cdn.tailwindcss.com 'unsafe-inline';
@@ -13,9 +26,6 @@
         form-action 'self' mailto:;
         frame-ancestors 'none';
     ">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CoreDraft Studio</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Inter for general text, Playfair Display for luxurious titles -->
@@ -360,5 +370,3 @@
     </script>
 </body>
 </html>
-
-       
