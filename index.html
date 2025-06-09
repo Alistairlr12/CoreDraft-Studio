@@ -3,370 +3,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CoreDraft Studio</title>
-    <!-- Content Security Policy (CSP) -->
-    <!-- This policy helps mitigate Cross-Site Scripting (XSS) and other code injection attacks. -->
-    <!-- 'self': Allows resources from the same origin as the document. -->
-    <!-- https://cdn.tailwindcss.com: Allows Tailwind CSS from its CDN. -->
-    <!-- https://fonts.googleapis.com: Allows Google Fonts stylesheets. -->
-    <!-- https://fonts.gstatic.com: Allows Google Fonts font files. -->
-    <!-- 'unsafe-inline': Required for inline <style> blocks and 'onclick' attributes. -->
-    <!-- data:: Allows data URIs for images (if any are used). -->
-    <!-- mailto:: Allows mailto: links for email contact. -->
-    <!-- frame-ancestors 'none': Prevents the page from being embedded in iframes on other sites (clickjacking protection). -->
-    <meta http-equiv="Content-Security-Policy" content="
-        default-src 'self';
-        script-src 'self' https://cdn.tailwindcss.com 'unsafe-inline';
-        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-        font-src 'self' https://fonts.gstatic.com;
-        img-src 'self' data:;
-        connect-src 'self';
-        object-src 'none';
-        base-uri 'self';
-        form-action 'self' mailto:;
-        frame-ancestors 'none';
-    ">
-    <!-- Tailwind CSS CDN -->
+    <title>CoreDraft Studios - AI Marketing Solutions</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Google Fonts: Inter for general text, Playfair Display for luxurious titles -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        /* Custom styles for the Inter font and any specific overrides */
         body {
             font-family: 'Inter', sans-serif;
         }
-        .font-playfair-display {
-            font-family: 'Playfair Display', serif;
+        /* Ensure smooth scrolling for internal links */
+        html {
+            scroll-behavior: smooth;
         }
-        /* Custom animations */
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        .animate-fade-in-down {
-            animation: fadeInDown 1s ease-out forwards;
-        }
-        .animate-fade-in-up {
-            animation: fadeInUp 1s ease-out forwards;
-            animation-delay: 0.3s; /* Delay for staggered effect */
-        }
-
-        /* Pulsating light effect for background */
-        @keyframes pulseLight {
-            0% {
-                transform: scale(1);
-                opacity: 0.1;
-            }
-            50% {
-                transform: scale(1.1);
-                opacity: 0.3;
-            }
-            100% {
-                transform: scale(1);
-                opacity: 0.1;
-            }
-        }
-
-        .animate-pulse-light {
-            animation: pulseLight 8s ease-in-out infinite; /* Adjust speed as needed */
-        }
-
-        .bg-radial-pulse {
-            background: radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+        /* Custom image placeholder for hero section */
+        .hero-background {
+            background-image: url('https://placehold.co/1500x500/0A2342/FFFFFF?text=CoreDraft+Studios+AI+Marketing+Innovation');
+            background-size: cover;
+            background-position: center;
         }
     </style>
 </head>
-<body class="font-inter antialiased text-gray-800 bg-gray-50">
+<body class="bg-gray-50 text-gray-800">
 
-    <!-- Navigation Bar -->
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-white shadow-md py-4 px-6 md:px-12 flex justify-between items-center rounded-b-lg">
-        <div class="text-2xl font-bold text-sky-700 font-playfair-display">
-            CoreDraft Studio
+    <header class="bg-white shadow-md py-4">
+        <div class="container mx-auto px-4 flex justify-between items-center">
+            <a href="#home" class="text-2xl font-bold text-blue-700">CoreDraft Studios</a>
+            <nav>
+                <ul class="flex space-x-6">
+                    <li><a href="#services" class="text-gray-600 hover:text-blue-700 font-semibold transition duration-300 ease-in-out">Services</a></li>
+                    <li><a href="#about" class="text-gray-600 hover:text-blue-700 font-semibold transition duration-300 ease-in-out">About Me</a></li>
+                    <li><a href="#contact" class="text-gray-600 hover:text-blue-700 font-semibold transition duration-300 ease-in-out">Contact</a></li>
+                </ul>
+            </nav>
         </div>
-        <ul class="hidden md:flex space-x-8">
-            <li>
-                <button onclick="scrollToSection('home')" class="nav-link text-lg font-medium hover:text-sky-600 transition duration-300">
-                    Home
-                </button>
-            </li>
-            <li>
-                <button onclick="scrollToSection('about')" class="nav-link text-lg font-medium hover:text-sky-600 transition duration-300">
-                    About
-                </button>
-            </li>
-            <li>
-                <button onclick="scrollToSection('services')" class="nav-link text-lg font-medium hover:text-sky-600 transition duration-300">
-                    Services
-                </button>
-            </li>
-            <li>
-                <button onclick="scrollToSection('portfolio')" class="nav-link text-lg font-medium hover:text-sky-600 transition duration-300">
-                    Portfolio
-                </button>
-            </li>
-            <li>
-                <button onclick="scrollToSection('contact')" class="nav-link text-lg font-medium hover:text-sky-600 transition duration-300">
-                    Contact
-                </button>
-            </li>
-        </ul>
-        <!-- Mobile menu button (can add functionality later) -->
-        <button class="md:hidden text-gray-600 hover:text-sky-600 focus:outline-none">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
-            </svg>
-        </button>
-    </nav>
+    </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="relative bg-blue-950 text-white py-24 md:py-36 text-center overflow-hidden rounded-b-xl shadow-lg">
-        <div class="container mx-auto px-6 relative z-10">
-            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6 animate-fade-in-down font-playfair-display">
-                Precision Copy for <span class="text-blue-300">Engineering</span> & <span class="text-blue-300">Fitness</span>
+    <section id="home" class="hero-background text-white py-20 md:py-32 text-center rounded-b-lg">
+        <div class="container mx-auto px-4">
+            <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4 drop-shadow-lg">
+                Revolutionize Your Marketing with AI by CoreDraft Studios
             </h1>
-            <p class="text-xl md:text-2xl mb-10 max-w-3xl mx-auto opacity-90 animate-fade-in-up">
-                I help cutting-edge engineering firms spark global fascination for their groundbreaking innovations, and empower fitness businesses to boost member acquisition and retention.
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto drop-shadow-md">
+                Leveraging artificial intelligence to craft compelling landing pages, impactful ads, and engaging copywriting for your business.
             </p>
-            <button onclick="scrollToSection('contact')" class="bg-white text-sky-700 hover:bg-sky-100 px-8 py-4 rounded-full text-lg font-semibold shadow-xl transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-sky-300">
-                Let's Build Your Success Story
-            </button>
-        </div>
-        <!-- Background elements: Subtle pulsating light effect -->
-        <div class="absolute inset-0 z-0">
-            <div class="absolute inset-0 bg-radial-pulse opacity-20 animate-pulse-light"></div>
+            <a href="#services" class="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+                Discover Our Services
+            </a>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="py-16 md:py-24 bg-white rounded-xl shadow-md mx-4 md:mx-8 -mt-12 relative z-20">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-8 font-playfair-display">
-                About My Specialized Approach
-            </h2>
-            <div class="max-w-4xl mx-auto text-lg text-gray-700 leading-relaxed">
-                <p class="mb-6">
-                    Leveraging my background in Mechanical Engineering and a deep understanding of the rapidly evolving engineering world, alongside the motivational psychology of the fitness industry, I craft copy that doesn't just inform, but converts. My expertise lies in translating intricate technical details into compelling narratives for engineering firms, and in creating empathetic, results-driven content that inspires action for fitness brands.
-                </p>
-                <p class="mb-6">
-                    I believe in a problem-solving approach. For engineering clients, this means developing content that generates qualified leads, demonstrates tangible ROI, and attracts top-tier talent. For fitness clients, it's about crafting personalized email campaigns that reduce churn, engaging social media content that builds community, and landing pages that drive new memberships.
-                </p>
-                <p>
-                    My goal is to be more than just a copywriter; I aim to be a strategic partner who helps you achieve your business objectives through the power of words.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Services Section -->
-    <section id="services" class="py-16 md:py-24 bg-gray-100 rounded-xl shadow-md mx-4 md:mx-8 mt-8">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12 font-playfair-display">
-                My Specialized Copywriting Services
-            </h2>
-            <div class="flex justify-center">
-                <div class="bg-white p-8 rounded-lg shadow-lg border-t-4 border-sky-500 hover:shadow-xl transition duration-300 transform hover:-translate-y-1 w-full max-w-2xl">
-                    <p class="text-gray-700 mb-6 text-center">
-                        I provide highly effective copywriting services focused on direct response and conversion for both engineering and fitness industries. My core services include:
-                    </p>
-                    <ul class="list-disc list-inside text-gray-600 space-y-3 mx-auto max-w-md">
-                        <li><span class="font-medium text-gray-800">Emails:</span> Engaging and persuasive email sequences for lead nurturing, sales, and retention.</li>
-                        <li><span class="font-medium text-gray-800">Ad Copy:</span> High-converting ad copy for various platforms designed to capture attention and drive clicks.</li>
-                        <li><span class="font-medium text-gray-800">Sales Page Copy:</span> Compelling sales page content structured to convert visitors into customers.</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Portfolio Section -->
-    <section id="portfolio" class="py-16 md:py-24 bg-white rounded-xl shadow-md mx-4 md:mx-8 mt-8">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12 font-playfair-display">
-                Showcase of Influence: My Work
-            </h2>
+    <section id="services" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 text-gray-900">Our AI-Powered Services by CoreDraft Studios</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Email Copy Example -->
-                <div class="bg-gray-50 p-6 rounded-lg shadow-md border border-gray-200 hover:shadow-lg transition duration-300">
-                    <!-- Mail icon SVG -->
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail text-blue-900 mb-4 mx-auto block"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Email Sequence Example (Engineering)</h3>
-                    <p class="text-gray-700 text-sm mb-4">
-                        A sample email sequence designed to nurture leads for a firm in the engineering industry.
-                    </p>
-                    <div class="bg-gray-100 p-4 rounded-md text-sm text-gray-700 font-mono overflow-auto max-h-32">
-                        <p class="font-bold">Subject: Quantum Leap in Manufacturing Efficiency!</p>
-                        <p class="mt-2">Hi [Name],</p>
-                        <p>Discover how a leading engineering firm is revolutionizing industrial automation. Our latest AI solution streamlines processes and boosts efficiency like never before.</p>
-                        <p class="mt-2">Get a free demo and see the future of efficiency in action. Limited spots available!</p>
-                        <p class="mt-2">Best,</p>
-                        <p>The Innovation Team</p>
+                <div class="bg-gray-50 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out border border-gray-200">
+                    <div class="flex justify-center mb-4">
+                        <svg class="w-12 h-12 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 2 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                     </div>
-                </div>
-
-                <!-- Ad Copy Example -->
-                <div class="bg-gray-50 p-6 rounded-lg shadow-md border border-gray-200 hover:shadow-lg transition duration-300">
-                    <!-- Award icon SVG -->
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-award text-blue-300 mb-4 mx-auto block"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17.18 21l-5.18-3-5.178 3L8.522 12.89"/></svg>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Ad Campaign Example (Fitness)</h3>
-                    <p class="text-gray-700 text-sm mb-4">
-                        Developed high-impact ad copy for a prominent fitness brand's launch campaign, driving significant pre-registrations.
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-2 text-center">AI-Generated Landing Pages</h3>
+                    <p class="text-gray-600 text-center">
+                        Craft high-converting, mobile-responsive landing pages optimized for your campaigns, designed rapidly with AI.
                     </p>
-                    <div class="bg-gray-100 p-4 rounded-md text-sm text-gray-700 font-mono overflow-auto max-h-32">
-                        <p class="font-bold">Headline: Transform Your Body in 30 Days!</p>
-                        <p class="mt-2">Tired of feeling stuck? Join our exclusive 30-day fitness challenge and unlock your true potential. Personalized plans, expert coaching, and a supportive community await.</p>
-                        <p class="mt-2 text-blue-600">Limited spots! Sign up now &rarr;</p>
-                    </div>
                 </div>
-
-                <!-- Sales Page Copy Example -->
-                <div class="bg-gray-50 p-6 rounded-lg shadow-md border border-gray-200 hover:shadow-lg transition duration-300">
-                    <!-- FileText icon SVG -->
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-file-text text-blue-900 mb-4 mx-auto block"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Sales Page Snippet Example (Engineering)</h3>
-                    <p class="text-gray-700 text-sm mb-4">
-                        Authored a persuasive sales page for new engineering simulation software, achieving a 15% conversion rate increase.
+                <div class="bg-gray-50 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out border border-gray-200">
+                    <div class="flex justify-center mb-4">
+                        <svg class="w-12 h-12 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8V4m0 8v4m-4 0h8m-4-8H4m-.085 18.093A2 2 0 012 20V4a2 2 0 012-2h16a2 2 0 012 2v16a2 2 0 01-2 2H4.915z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-2 text-center">Intelligent Ad Copy & Creatives</h3>
+                    <p class="text-gray-600 text-center">
+                        Develop persuasive ad copy and eye-catching visual concepts that resonate with your target audience across platforms.
                     </p>
-                    <div class="bg-gray-100 p-4 rounded-md text-sm text-gray-700 font-mono overflow-auto max-h-32">
-                        <p class="font-bold">Headline: Unlock Unprecedented Efficiency with [Software Name]</p>
-                        <p class="mt-2">In today's competitive landscape, stagnation is not an option. [Software Name] is engineered for unparalleled precision, seamlessly integrating into your existing workflow to slash operational costs by up to 25%.</p>
-                        <p class="mt-2">Discover how industry leaders are gaining a decisive competitive edge. Request a personalized consultation today and redefine your production capabilities.</p>
-                    </div>
                 </div>
-
-                <!-- Generic Website Copy Example (Engineering) -->
-                <div class="bg-gray-50 p-6 rounded-lg shadow-md border border-gray-200 hover:shadow-lg transition duration-300">
-                    <!-- Briefcase icon SVG -->
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-briefcase text-blue-900 mb-4 mx-auto block"><rect width="20" height="14" x="2" y="7" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/><path d="M12 12h.01"/></svg>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Website Copy Example (Engineering)</h3>
-                    <p class="text-gray-700 text-sm mb-4">
-                        Rewrote core website pages to improve clarity, SEO ranking, and conversion rates for a specialized engineering company.
+                <div class="bg-gray-50 p-6 rounded-lg shadow-lg hover:shadow-xl transition duration-300 ease-in-out border border-gray-200">
+                    <div class="flex justify-center mb-4">
+                        <svg class="w-12 h-12 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
+                    </div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-2 text-center">Automated Content Writing</h3>
+                    <p class="text-gray-600 text-center">
+                        Generate high-quality, SEO-friendly content from blog posts to product descriptions, scaled to your needs.
                     </p>
-                    <div class="bg-gray-100 p-4 rounded-md text-sm text-gray-700 font-mono overflow-auto max-h-32">
-                        <p class="font-bold">Headline: Pioneering Tomorrow's Solutions Today</p>
-                        <p class="mt-2">At [Company Name], we blend innovative engineering with practical application to deliver solutions that redefine industry standards. Explore our expertise in [specific engineering field] and discover how we can elevate your next project.</p>
-                        <p class="mt-2">From concept to completion, our commitment to precision and performance ensures your vision becomes a reality. Partner with us for unparalleled engineering excellence.</p>
-                    </div>
                 </div>
-
-                <!-- Generic Client Testimonial Example (Fitness) -->
-                <div class="bg-gray-50 p-6 rounded-lg shadow-md border border-gray-200 hover:shadow-lg transition duration-300">
-                    <!-- User icon SVG -->
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-user text-blue-300 mb-4 mx-auto block"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Client Testimonial Example (Fitness)</h3>
-                    <p class="text-gray-700 text-sm mb-4">
-                        Developed engaging social media content that boosted client engagement and attracted more sign-ups for an online coaching program.
-                    </p>
-                    <div class="bg-gray-100 p-4 rounded-md text-sm text-gray-700 font-mono overflow-auto max-h-32">
-                        <p class="font-bold">"Absolutely Transformed My Routine!"</p>
-                        <p class="mt-2">"Before [Fitness Brand], my workouts were stale and I lacked motivation. Their personalized approach and supportive community completely changed my perspective. I've achieved goals I never thought possible!" - [Client Name], Fitness Enthusiast</p>
-                    </div>
-                </div>
-            </div>
-            <p class="text-center text-lg text-gray-700 mt-12">
-                These examples offer a glimpse into my capabilities. For a bespoke portfolio review and to discuss how my expertise can be tailored to your specific industry and goals, please reach out directly.
-            </p>
-            <div class="text-center mt-6">
-                <button onclick="scrollToSection('contact')" class="bg-sky-600 text-white hover:bg-sky-700 px-8 py-4 rounded-full text-lg font-semibold shadow-xl transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-sky-300">
-                    Ready to See Your Success?
-                </button>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-16 md:py-24 bg-gradient-to-r from-blue-950 to-blue-900 text-white rounded-xl shadow-lg mx-4 md:mx-8 mt-8">
-        <div class="container mx-auto px-6 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-8 font-playfair-display">
-                Let's Connect
-            </h2>
-            <p class="text-lg mb-10 max-w-2xl mx-auto opacity-90">
-                Ready to elevate your engineering firm's messaging or boost your fitness business's client engagement? I'd love to hear from you.
-            </p>
-            <div class="flex flex-col items-center space-y-6 md:space-y-0 md:flex-row md:justify-center md:space-x-8">
-                <a href="mailto:alistair.lechartier1@outlook.com" class="flex items-center bg-sky-600 hover:bg-sky-700 px-6 py-3 rounded-full text-lg font-medium shadow-lg transition duration-300 transform hover:scale-105">
-                    <!-- Mail icon SVG -->
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-mail w-6 h-6 mr-3"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-                    Email Me
-                </a>
-                <a href="tel:+447596395064" class="flex items-center bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-full text-lg font-medium shadow-lg transition duration-300 transform hover:scale-105">
-                    <!-- Phone icon SVG -->
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-phone w-6 h-6 mr-3"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-3.07-8.63A2 2 0 0 1 4.11 2H7c.43 0 .85.11 1.17.38l1.24 1.86a3 3 0 0 1-.69 4.02L7.12 11.4a14.5 14.5 0 0 0 6.46 6.46l2.07-1.9a3 3 0 0 1 4.02-.69l1.86 1.24c.27.32.38.74.38 1.17z"/></svg>
-                    Call Me
-                </a>
+    <section id="about" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <h2 class="text-4xl font-bold text-center mb-12 text-gray-900">About Alistair Lechartier & CoreDraft Studios</h2>
+            <div class="bg-white p-8 rounded-lg shadow-lg border border-gray-200">
+                <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                    Hello! I'm Alistair Lechartier, the founder of **CoreDraft Studios**. My unique professional journey underpins my innovative approach to AI-powered marketing. My foundation lies in **Mechanical Engineering**, a discipline that instilled in me a rigorous, analytical mindset. This background taught me to dissect complex systems, optimize processes for maximum efficiency, and approach problem-solving with precision and a keen eye for detail. These principles are directly transferable to marketing, where understanding audience behavior, campaign mechanics, and performance metrics is crucial.
+                </p>
+                <p class="text-lg text-gray-700 leading-relaxed mb-6">
+                    Complementing my engineering background, my extensive experience in **App Reviewing** has provided me with invaluable insights into user experience (UX) and the psychology of engagement. Reviewing countless applications trained me to identify what truly resonates with users, how intuitive design impacts interaction, and the nuances of persuasive communication. I learned to critically assess functionality, articulate value propositions effectively, and understand the elements that capture and retain user attention.
+                </p>
+                <p class="text-lg text-gray-700 leading-relaxed">
+                    Bringing these diverse skills together, **CoreDraft Studios** leverages AI to build marketing solutions that are not just intelligent, but also inherently effective and user-centric. My engineering discipline ensures a data-driven, structured approach to campaigns, focusing on measurable results and scalable strategies. Meanwhile, my app reviewing expertise guarantees that the AI-generated content and designs are compelling, user-friendly, and truly connect with your target audience. This unique blend allows CoreDraft Studios to create marketing efforts that are optimized for both performance and genuine human appeal.
+                </p>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="bg-blue-950 text-white py-8 text-center rounded-t-xl shadow-lg mt-8">
-        <div class="container mx-auto px-6">
-            <p>&copy; <span id="current-year"></span> CoreDraft Studio. All rights reserved.</p>
-            <div class="flex justify-center space-x-6 mt-4">
-                <a href="#" class="text-gray-400 hover:text-white transition duration-300">Privacy Policy</a>
-                <a href="#" class="text-gray-400 hover:text-white transition duration-300">Terms of Service</a>
+    <section id="why-choose-us" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold text-center mb-12 text-gray-900">Why Choose CoreDraft Studios?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-blue-50 p-6 rounded-lg shadow-md border border-blue-200">
+                    <h3 class="text-2xl font-semibold text-blue-700 mb-2">Unmatched Efficiency</h3>
+                    <p class="text-gray-700">Accelerate your marketing campaigns with AI-powered content generation and optimization, reducing time-to-market significantly.</p>
+                </div>
+                <div class="bg-blue-50 p-6 rounded-lg shadow-md border border-blue-200">
+                    <h3 class="text-2xl font-semibold text-blue-700 mb-2">Cost-Effective Strategies</h3>
+                    <p class="text-gray-700">Minimize overheads by automating repetitive tasks and optimizing ad spend with data-driven AI insights.</p>
+                </div>
+                <div class="bg-blue-50 p-6 rounded-lg shadow-md border border-blue-200">
+                    <h3 class="text-2xl font-semibold text-blue-700 mb-2">Data-Driven Performance</h3>
+                    <p class="text-gray-700">Leverage AI to analyze vast datasets, ensuring every marketing decision is backed by intelligent, real-time insights.</p>
+                </div>
+                <div class="bg-blue-50 p-6 rounded-lg shadow-md border border-blue-200">
+                    <h3 class="text-2xl font-semibold text-blue-700 mb-2">Scalable Solutions</h3>
+                    <p class="text-gray-700">Expand your marketing efforts seamlessly as your business grows, with AI handling the increased demand efficiently.</p>
+                </div>
+                <div class="bg-blue-50 p-6 rounded-lg shadow-md border border-blue-200">
+                    <h3 class="text-2xl font-semibold text-blue-700 mb-2">Consistent Brand Voice</h3>
+                    <p class="text-gray-700">Ensure uniformity in messaging and quality across all your marketing channels, maintaining strong brand identity.</p>
+                </div>
+                <div class="bg-blue-50 p-6 rounded-lg shadow-md border border-blue-200">
+                    <h3 class="text-2xl font-semibold text-blue-700 mb-2">Cutting-Edge Innovation</h3>
+                    <p class="text-gray-700">Stay ahead of the competition by utilizing the latest advancements in artificial intelligence for your marketing needs.</p>
+                </div>
             </div>
+        </div>
+    </section>
+
+    <section class="py-16 bg-blue-700 text-white text-center rounded-t-lg">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold mb-4">Ready to Transform Your Marketing with CoreDraft Studios?</h2>
+            <p class="text-xl mb-8">Let's discuss how AI can elevate your business's online presence and engagement.</p>
+            <a href="#contact" class="inline-block bg-white hover:bg-gray-100 text-blue-700 font-bold py-3 px-8 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105">
+                Get in Touch
+            </a>
+        </div>
+    </section>
+
+    <footer id="contact" class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-6">Contact CoreDraft Studios</h2>
+            <p class="text-lg mb-2">Email: <a href="mailto:alistair.lechartier1@outlook.com" class="text-blue-400 hover:text-blue-300 transition duration-300 ease-in-out">alistair.lechartier1@outlook.com</a></p>
+            <p class="text-lg mb-6">Phone: <a href="tel:07596395064" class="text-blue-400 hover:text-blue-300 transition duration-300 ease-in-out">07596395064</a></p>
+            <p class="text-sm text-gray-400">&copy; 2025 CoreDraft Studios. All rights reserved.</p>
         </div>
     </footer>
 
-    <script>
-        // Function to scroll to a section
-        function scrollToSection(sectionId) {
-            const section = document.getElementById(sectionId);
-            if (section) {
-                section.scrollIntoView({ behavior: 'smooth' });
-            }
-        }
-
-        // Highlight active navigation link based on scroll position
-        const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('.nav-link');
-
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.7 // Adjust as needed, higher value means more of the section must be visible
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    navLinks.forEach(link => {
-                        link.classList.remove('text-sky-700');
-                        link.classList.add('text-gray-600');
-                    });
-                    const correspondingLink = document.querySelector(`.nav-link[onclick*="${entry.target.id}"]`);
-                    if (correspondingLink) {
-                        correspondingLink.classList.remove('text-gray-600');
-                        correspondingLink.classList.add('text-sky-700');
-                    }
-                }
-            });
-        }, observerOptions);
-
-        sections.forEach(section => {
-            observer.observe(section);
-        });
-
-        // Set current year in footer
-        document.getElementById('current-year').textContent = new Date().getFullYear();
-
-        // Removed the hashchange listener as snippets are now inline
-    </script>
 </body>
 </html>
