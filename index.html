@@ -88,8 +88,8 @@
 
         /* --- Styles for the overall Light Switch Container (now rectangular) --- */
         .light-switch-container {
-            display: flex; /* Arranges halves side-by-side */
-            border-radius: 1.5rem; /* Rectangular with rounded corners */
+            display: flex;
+            border-radius: 1.5rem; /* Symmetrical rounded rectangular shape */
             box-shadow: 0 15px 30px -8px rgba(0, 0, 0, 0.4); /* General shadow for the switch */
             overflow: hidden;
             max-width: 600px; /* Max width for the switch */
@@ -114,10 +114,15 @@
             position: relative;
             overflow: hidden;
             min-height: 100%;
-            border-radius: 0; /* Remove irregular border-radius from individual halves */
+            /* Removed individual border-radius settings here as they are handled by the container */
+            border-radius: 0; /* Ensures no internal rounded corners conflict with parent */
+
+            /* Default state for both halves: slightly raised */
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
-        /* Specific border-radius for the outer edges of the combined switch */
+        /* Specific border-radius for the outer edges of the combined switch, creating symmetry */
         .email-half {
             border-top-left-radius: 1.5rem;
             border-bottom-left-radius: 1.5rem;
@@ -140,15 +145,10 @@
             margin-bottom: 0; /* Remove extra margin */
         }
 
-        /* Initial state (default neutral position) and Hover state */
-        .switch-half {
-            transform: translateY(0); /* Default neutral position */
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2); /* Default outer shadow for raised look */
-        }
-
+        /* Hover state: Makes the switch half rise further */
         .switch-half:hover {
-            transform: translateY(-8px); /* Rises a bit more on hover */
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3); /* Stronger outer shadow on hover */
+            transform: translateY(-10px); /* Rises a bit more on hover */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); /* Stronger outer shadow on hover */
         }
 
         /* Active/Pressed state for the clicked half */
@@ -156,23 +156,8 @@
             transform: translateY(5px); /* Moves down (pressed) */
             box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.4); /* Deep inset shadow for pressed look */
         }
-        /* When one is active, the other should rise */
-        .email-half.is-active + .phone-half {
-            transform: translateY(-5px); /* Phone half rises when email is active */
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
-        .phone-half.is-active + .email-half { /* Note: This specific selector won't work as phone is after email in HTML */
-            /* This case needs to be handled if Phone is before Email, but in this HTML, it's not the direct sibling */
-            /* A more robust JS approach is usually better for sibling-based active state reactions */
-        }
-        /* General rule for the non-active side when one is active */
-        .switch-half.is-active ~ .switch-half:not(.is-active),
-        .switch-half:not(.is-active).active-sibling { /* Added a class for JS to apply */
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-        }
 
-        /* Remove pseudo-elements from switch halves as they are no longer irregular shapes with internal glows */
+        /* Pseudo-elements for inner glows are removed from individual switch halves */
         .switch-half::before,
         .switch-half::after {
             content: none;
@@ -341,26 +326,28 @@
 
             // Function to handle click and apply/remove 'is-active' class
             function handleSwitchClick(clickedElement, targetLink) {
-                // Remove 'is-active' from both to reset state
-                emailSide.classList.remove('is-active');
-                phoneSide.classList.remove('is-active');
-
-                // Add 'is-active' to the clicked element, triggering the 'pressed' animation
-                clickedElement.classList.add('is-active');
-
-                // Ensure the other element is in a raised state when one is active
                 const otherElement = clickedElement === emailSide ? phoneSide : emailSide;
-                otherElement.classList.remove('is-active'); // Ensure it's not active
-                otherElement.style.transform = 'translateY(-5px)'; // Explicitly set to raised
-                otherElement.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.2)'; // Explicitly set outer shadow
+
+                // Apply 'pressed' state to the clicked element
+                clickedElement.style.transform = 'translateY(5px)';
+                clickedElement.style.boxShadow = 'inset 0 0 15px rgba(0, 0, 0, 0.4)';
+
+                // Apply 'raised' state to the other element
+                otherElement.style.transform = 'translateY(-5px)'; /* Default raised position */
+                otherElement.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.2)'; /* Default outer shadow */
 
                 // Trigger the email/phone link after a short delay to allow the animation to play
                 setTimeout(() => {
                     window.location.href = targetLink;
+                    // Reset to default raised state for both after action (if not navigating away)
+                    emailSide.style.transform = 'translateY(-5px)';
+                    emailSide.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.2)';
+                    phoneSide.style.transform = 'translateY(-5px)';
+                    phoneSide.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.2)';
                 }, 300); // 300 milliseconds delay
             }
 
-            // Add event listeners to each half
+            // Add event listeners for click (and touch)
             emailSide.addEventListener('click', () => {
                 handleSwitchClick(emailSide, 'mailto:alistair.lechartier1@outlook.com');
             });
@@ -369,13 +356,33 @@
                 handleSwitchClick(phoneSide, 'tel:07596395064');
             });
 
-            // Initial state setup (optional, if you want one side to start "pressed")
-            // For example, to start with the phone side slightly pressed:
-            // phoneSide.classList.add('is-active'); // If you want one to start active
-            // emailSide.style.transform = 'translateY(-5px)';
-            // emailSide.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.2)';
+            // Handle hover events for both halves for visual feedback
+            emailSide.addEventListener('mouseenter', () => {
+                emailSide.style.transform = 'translateY(-10px)'; /* Rise more on hover */
+                emailSide.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.3)'; /* Stronger shadow on hover */
+            });
+            emailSide.addEventListener('mouseleave', () => {
+                // Only reset if not active (clicked)
+                emailSide.style.transform = 'translateY(-5px)'; /* Default raised position */
+                emailSide.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.2)'; /* Default outer shadow */
+            });
+
+            phoneSide.addEventListener('mouseenter', () => {
+                phoneSide.style.transform = 'translateY(-10px)';
+                phoneSide.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.3)';
+            });
+            phoneSide.addEventListener('mouseleave', () => {
+                // Only reset if not active (clicked)
+                phoneSide.style.transform = 'translateY(-5px)';
+                phoneSide.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.2)';
+            });
+
+            // Set initial state for both halves on load
+            emailSide.style.transform = 'translateY(-5px)';
+            emailSide.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.2)';
+            phoneSide.style.transform = 'translateY(-5px)';
+            phoneSide.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.2)';
         });
     </script>
 </body>
 </html>
-
