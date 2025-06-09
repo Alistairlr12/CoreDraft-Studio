@@ -163,55 +163,18 @@
         .switch-half::after {
             content: none;
         }
-
-        /* Mobile Menu specific styles */
-        #mobile-menu {
-            transition: transform 0.3s ease-in-out;
-            transform: translateX(100%); /* Start off-screen to the right */
-        }
-        #mobile-menu.is-open {
-            transform: translateX(0); /* Slide in */
-        }
     </style>
 </head>
 <body class="text-gray-800">
 
     <!-- Header Section: Fixed at the top with a subtle shadow -->
     <header class="bg-white shadow-lg py-4 fixed top-0 left-0 right-0 z-50 rounded-b-xl">
-        <div class="container mx-auto px-4 flex justify-between items-center">
-            <!-- Company Name / Logo -->
+        <div class="container mx-auto px-4 flex justify-center items-center">
+            <!-- Company Name / Logo - Centered and explicitly uses Playfair Display -->
             <a href="#home" class="text-3xl font-bold text-indigo-700 font-['Playfair_Display']">CoreDraft Studios</a>
             
-            <!-- Desktop Navigation (hidden on mobile) -->
-            <nav class="hidden md:block">
-                <ul class="flex space-x-8">
-                    <li><a href="#services" class="text-purple-600 hover:text-purple-700 font-semibold transition duration-300 ease-in-out">Services</a></li>
-                    <li><a href="#about" class="text-purple-600 hover:text-purple-700 font-semibold transition duration-300 ease-in-out">About Me</a></li>
-                    <li><a href="#contact" class="text-purple-600 hover:text-purple-700 font-semibold transition duration-300 ease-in-out">Contact</a></li>
-                </ul>
-            </nav>
-
-            <!-- Mobile Hamburger Menu Icon (visible on mobile, hidden on desktop) -->
-            <button id="mobile-menu-button" class="block md:hidden focus:outline-none p-2 rounded-md hover:bg-gray-100 transition duration-200 ease-in-out">
-                <svg class="w-8 h-8 text-indigo-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                </svg>
-            </button>
+            <!-- Mobile Menu Button and Mobile Menu HTML removed -->
         </div>
-
-        <!-- Mobile Navigation Menu (hidden by default, slides in from right) -->
-        <nav id="mobile-menu" class="fixed top-0 right-0 w-64 h-full bg-white shadow-xl z-40 flex flex-col items-center justify-center p-8 md:hidden">
-            <button id="close-mobile-menu" class="absolute top-4 right-4 focus:outline-none p-2 rounded-md hover:bg-gray-100 transition duration-200 ease-in-out">
-                <svg class="w-8 h-8 text-indigo-700" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
-            </button>
-            <ul class="flex flex-col space-y-8 text-2xl font-bold text-gray-800">
-                <li><a href="#services" class="hover:text-purple-600" onclick="document.getElementById('mobile-menu').classList.remove('is-open');">Services</a></li>
-                <li><a href="#about" class="hover:text-purple-600" onclick="document.getElementById('mobile-menu').classList.remove('is-open');">About Me</a></li>
-                <li><a href="#contact" class="hover:text-purple-600" onclick="document.getElementById('mobile-menu').classList.remove('is-open');">Contact</a></li>
-            </ul>
-        </nav>
     </header>
 
     <!-- Hero Section: Now with a white background and the central purple irregular shape -->
@@ -354,35 +317,28 @@
             const emailSide = document.getElementById('emailSide');
             const phoneSide = document.getElementById('phoneSide');
 
-            // Function to reset both halves to default raised state
-            function resetSwitchState() {
-                emailSide.style.transform = 'translateY(-5px)';
-                emailSide.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.2)';
-                phoneSide.style.transform = 'translateY(-5px)';
-                phoneSide.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.2)';
-                emailSide.classList.remove('is-active');
-                phoneSide.classList.remove('is-active');
-            }
-
             // Function to handle click and apply states
             function handleSwitchClick(clickedElement, targetLink) {
                 const otherElement = clickedElement === emailSide ? phoneSide : emailSide;
 
-                // Set clicked element to 'pressed' state
+                // Apply 'pressed' state to the clicked element
                 clickedElement.style.transform = 'translateY(5px)';
                 clickedElement.style.boxShadow = 'inset 0 0 15px rgba(0, 0, 0, 0.4)';
-                clickedElement.classList.add('is-active');
 
-                // Set other element to 'raised' state
-                otherElement.style.transform = 'translateY(-5px)';
-                otherElement.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.2)';
-                otherElement.classList.remove('is-active'); // Ensure other is not active
+                // Apply 'raised' state to the other element
+                otherElement.style.transform = 'translateY(-5px)'; /* Default raised position */
+                otherElement.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.2)'; /* Default outer shadow */
 
-                // Trigger navigation after a short delay
+                // Trigger the email/phone link after a short delay
                 setTimeout(() => {
                     window.location.href = targetLink;
-                    // Reset state after navigation attempt (important if navigation doesn't happen, e.g., on desktop for tel: link)
-                    resetSwitchState();
+                    // Optional: Reset state after navigation attempt (if navigation doesn't happen, e.g., on desktop for tel: link)
+                    // The page will typically navigate away, so explicit reset might not be needed.
+                    // If staying on page:
+                    // emailSide.style.transform = 'translateY(-5px)';
+                    // emailSide.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.2)';
+                    // phoneSide.style.transform = 'translateY(-5px)';
+                    // phoneSide.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.2)';
                 }, 300); // 300 milliseconds delay
             }
 
@@ -426,7 +382,11 @@
             });
 
             // Initialize both halves to default raised state on page load
-            resetSwitchState();
+            // Note: Removed 'is-active' class on initial load here
+            emailSide.style.transform = 'translateY(-5px)';
+            emailSide.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.2)';
+            phoneSide.style.transform = 'translateY(-5px)';
+            phoneSide.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.2)';
         });
     </script>
 </body>
