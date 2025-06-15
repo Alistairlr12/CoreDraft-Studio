@@ -86,82 +86,56 @@
             color: white; /* Text color is now white on the dark purple background */
         }
 
-        /* --- Styles for the overall Light Switch Container (now rectangular) --- */
-        .light-switch-container {
-            display: flex;
-            border-radius: 1.5rem; /* Symmetrical rounded rectangular shape */
-            box-shadow: 0 15px 30px -8px rgba(0, 0, 0, 0.4); /* General shadow for the switch */
-            overflow: hidden;
-            max-width: 600px; /* Max width for the switch */
-            margin: 0 auto; /* Center it within its parent */
-            margin-bottom: 2rem; /* Space below the switch */
-            height: 180px; /* Fixed height for consistent look */
-            position: relative;
-            z-index: 2;
-        }
-
-        /* Styles for each half of the switch (Email and Phone) - now rectangular */
-        .switch-half {
-            flex: 1; /* Each half takes equal width */
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+        /* Styles for direct contact info */
+        .contact-info-block {
+            background-color: #6d28d9; /* Lighter purple background */
+            padding: 2rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            margin-bottom: 2rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
             text-align: center;
-            cursor: pointer;
-            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out; /* Smooth animation */
-            padding: 1rem;
-            position: relative;
-            overflow: hidden;
-            min-height: 100%;
-            border-radius: 0; /* Remove individual border-radius settings here as they are handled by the container */
-
-            /* Default state for both halves: slightly raised */
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
 
-        /* Specific border-radius for the outer edges of the combined switch, creating symmetry */
-        .email-half {
-            border-top-left-radius: 1.5rem;
-            border-bottom-left-radius: 1.5rem;
-            background-color: white; /* White background for email side */
-            color: #4c1d95; /* Deep purple text for email side */
+        @media (min-width: 768px) {
+            .contact-info-block {
+                grid-template-columns: repeat(2, 1fr); /* Two columns on larger screens */
+                text-align: left; /* Align text left within columns */
+                padding: 3rem; /* More padding on larger screens */
+            }
+            .contact-info-block h3 {
+                grid-column: span 2; /* Span both columns for the name */
+                text-align: center; /* Center name */
+            }
+            .contact-info-block .contact-item {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+        }
+        
+        .contact-info-block a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease-in-out;
+            font-weight: 500;
         }
 
-        .phone-half {
-            border-top-right-radius: 1.5rem;
-            border-bottom-right-radius: 1.5rem;
-            background-color: #6d28d9; /* Lighter purple background for phone side */
-            color: white; /* White text for phone side */
+        .contact-info-block a:hover {
+            color: #d8b4fe; /* Lighter purple on hover */
         }
 
-        /* Styles for the labels within each half */
-        .switch-half .switch-label {
-            font-size: 1.875rem; /* text-3xl */
-            font-weight: 700; /* font-bold */
-            line-height: 1.2;
-            margin-bottom: 0; /* Remove extra margin */
-        }
-
-        /* Hover state: Makes the switch half rise further */
-        .switch-half:hover {
-            transform: translateY(-10px); /* Rises a bit more on hover */
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3); /* Stronger outer shadow on hover */
-        }
-
-        /* Active/Pressed state for the clicked half (managed by JS for consistency) */
-        /*
-        .switch-half.is-active {
-            transform: translateY(5px);
-            box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.4);
-        }
-        */
-
-        /* Pseudo-elements for inner glows are removed from individual switch halves */
-        .switch-half::before,
-        .switch-half::after {
-            content: none;
+        .contact-info-block .icon {
+            display: inline-block;
+            width: 1.5em;
+            height: 1.5em;
+            vertical-align: middle;
+            margin-right: 0.5rem;
         }
     </style>
 </head>
@@ -193,49 +167,22 @@
         </div>
     </section>
 
-    <!-- Services Section: Detailed offerings in a clean card layout -->
-    <section id="services" class="py-20 bg-purple-900 shadow-inner rounded-t-3xl mt-[-5rem] pt-20 shadow-2xl">
-        <div class="container mx-auto px-6">
-            <h2 class="text-5xl font-bold text-center mb-16 text-white">Our AI-Powered Services by CoreDraft Studios</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-                <!-- Service Item 1: Landing Pages -->
-                <div class="bg-purple-800 p-8 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 ease-in-out border border-transparent hover:border-purple-500 transform hover:-translate-y-2 hover:scale-102">
-                    <div class="flex justify-center mb-6">
-                        <svg class="w-16 h-16 text-indigo-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 2 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                    </div>
-                    <h3 class="text-2xl font-semibold text-white mb-3 text-center">AI-Generated Landing Pages</h3>
-                    <p class="text-white text-center text-lg">
-                        Craft high-converting, mobile-responsive landing pages optimized for your campaigns, designed rapidly with AI.
-                    </p>
-                </div>
-                <!-- Service Item 2: Intelligent Ad Copy & Creatives -->
-                <div class="bg-purple-800 p-8 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 ease-in-out border border-transparent hover:border-purple-500 transform hover:-translate-y-2 hover:scale-102">
-                    <div class="flex justify-center mb-6">
-                        <svg class="w-16 h-16 text-cyan-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8V4m0 8v4m-4 0h8m-4-8H4m-.085 18.093A2 2 0 012 20V4a2 2 0 012-2h16a2 2 0 012 2v16a2 2 0 01-2 2H4.915z"></path></svg>
-                    </div>
-                    <h3 class="text-2xl font-semibold text-white mb-3 text-center">Intelligent Ad Copy & Creatives</h3>
-                    <p class="text-white text-center text-lg">
-                        Develop persuasive ad copy and eye-catching visual concepts that resonate with your target audience across platforms.
-                    </p>
-                </div>
-                <!-- Service Item 3: Automated Content Writing -->
-                <div class="bg-purple-800 p-8 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 ease-in-out border border-transparent hover:border-purple-500 transform hover:-translate-y-2 hover:scale-102">
-                    <div class="flex justify-center mb-6">
-                        <svg class="w-16 h-16 text-purple-200" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"></path></svg>
-                    </div>
-                    <h3 class="text-2xl font-semibold text-white mb-3 text-center">Automated Content Writing</h3>
-                    <p class="text-white text-center text-lg">
-                        Generate high-quality, SEO-friendly content from blog posts to product descriptions, scaled to your needs.
-                    </p>
-                </div>
+    <!-- What We Do: Our Approach (New Section for basic summary) -->
+    <section id="what-we-do-summary" class="py-20 bg-purple-50 shadow-inner rounded-t-3xl mt-[-5rem] pt-20 shadow-2xl">
+        <div class="container mx-auto px-6 max-w-5xl">
+            <h2 class="text-5xl font-bold text-center mb-12 text-purple-900">What We Do: Our Approach</h2>
+            <div class="bg-white p-10 rounded-3xl shadow-lg border border-purple-100">
+                <p class="text-xl text-purple-800 leading-relaxed text-center">
+                    At CoreDraft Studios, we leverage cutting-edge AI alongside human strategic insights to revolutionize your marketing. From pinpointing crucial market insights to crafting compelling content and executing powerful campaigns, we provide tailored solutions that drive measurable growth and connect you deeply with your audience. We're here to streamline your efforts and amplify your brand's voice in the digital landscape.
+                </p>
             </div>
         </div>
     </section>
 
     <!-- About Me Section: Personal background and its relevance to CoreDraft Studios -->
-    <section id="about" class="py-20 bg-purple-900 shadow-inner rounded-t-3xl mt-[-5rem] pt-20 shadow-2xl">
+    <section id="about" class="py-20 bg-purple-100 shadow-inner rounded-t-3xl mt-[-5rem] pt-20 shadow-2xl">
         <div class="container mx-auto px-6 max-w-5xl">
-            <h2 class="text-5xl font-bold text-center mb-16 text-white">Our Expertise: The CoreDraft Difference</h2>
+            <h2 class="text-5xl font-bold text-center mb-16 text-purple-900">CoreDraft Studios' Foundational Expertise</h2>
             <div class="bg-white p-10 rounded-3xl shadow-2xl border border-gray-100">
                 <p class="text-xl text-purple-700 leading-relaxed mb-4">
                     At CoreDraft Studios, I uniquely combine mechanical precision with digital intuition to redefine marketing. My background in Mechanical Engineering instills a rigorous, analytical mindset, directly fueling strategic campaign development and driving measurable results.
@@ -251,9 +198,9 @@
     </section>
 
     <!-- Why Choose Us Section (Features): Highlights the benefits of choosing CoreDraft Studios -->
-    <section id="why-choose-us" class="py-20 bg-purple-900 shadow-inner rounded-t-3xl mt-[-5rem] pt-20 shadow-2xl">
+    <section id="why-choose-us" class="py-20 bg-purple-200 shadow-inner rounded-t-3xl mt-[-5rem] pt-20 shadow-2xl">
         <div class="container mx-auto px-6">
-            <h2 class="text-5xl font-bold text-center mb-16 text-white">Why Choose CoreDraft Studios?</h2>
+            <h2 class="text-5xl font-bold text-center mb-16 text-purple-900">Why Choose CoreDraft Studios?</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                 <!-- Feature Item 1: Efficiency -->
                 <div class="bg-purple-800 p-8 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 ease-in-out border border-transparent hover:border-purple-500 transform hover:-translate-y-2 hover:scale-102">
@@ -289,21 +236,128 @@
         </div>
     </section>
 
-    <!-- Consolidated Contact Section: Now features the interactive light switch -->
+    <!-- Services Section: Detailed offerings in a clean card layout (now re-positioned) -->
+    <section id="services" class="py-20 bg-purple-700 shadow-inner rounded-t-3xl mt-[-5rem] pt-20 shadow-2xl">
+        <div class="container mx-auto px-6">
+            <h2 class="text-5xl font-bold text-center mb-16 text-white">Our AI-Powered Service Packages</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-10">
+                <!-- Service Item 1: Bronze Package -->
+                <div class="bg-purple-900 p-8 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 ease-in-out border border-transparent hover:border-purple-500 transform hover:-translate-y-2 hover:scale-102 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-3xl font-semibold text-white mb-2 text-center">Bronze Package</h3>
+                        <p class="text-white text-center text-xl font-bold mb-6">£64</p>
+                        <h4 class="text-xl font-medium text-purple-200 mb-2">Goal:</h4>
+                        <p class="text-white text-md mb-4">Identify key issues and give small business owners actionable insights.</p>
+                        <h4 class="text-xl font-medium text-purple-200 mb-2">Ideal for:</h4>
+                        <p class="text-white text-md mb-4">Startups or small businesses wanting clarity before committing to deeper services.</p>
+                        <h4 class="text-xl font-medium text-purple-200 mb-2">Includes:</h4>
+                        <ul class="text-white text-md list-disc list-inside space-y-1">
+                            <li>Pros and cons list of current marketing strategies head to toe.</li>
+                            <li>Competitive Research Summary (identify what top competitors are doing)</li>
+                            <li>Ideal Customer Profile & Target Audience Snapshot</li>
+                            <li>Basic SEO & Website Health Report (technical issues, keyword gaps)</li>
+                            <li>A booklet explaining findings</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Service Item 2: Bronze+ Package -->
+                <div class="bg-purple-900 p-8 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 ease-in-out border border-transparent hover:border-purple-500 transform hover:-translate-y-2 hover:scale-102 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-3xl font-semibold text-white mb-2 text-center">Bronze+ Package</h3>
+                        <p class="text-white text-center text-xl font-bold mb-6">£89</p>
+                        <h4 class="text-xl font-medium text-purple-200 mb-2">Ideal for:</h4>
+                        <p class="text-white text-md mb-4">Small businesses that just want a bit more insight after their initial analysis.</p>
+                        <h4 class="text-xl font-medium text-purple-200 mb-2">Includes:</h4>
+                        <ul class="text-white text-md list-disc list-inside space-y-1">
+                            <li>30-minute call outlining next actionable steps, opportunity to ask any questions</li>
+                            <li>Roadmap guide to better marketing</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Service Item 3: Silver Package -->
+                <div class="bg-purple-900 p-8 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 ease-in-out border border-transparent hover:border-purple-500 transform hover:-translate-y-2 hover:scale-102 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-3xl font-semibold text-white mb-2 text-center">Silver Package</h3>
+                        <p class="text-white text-center text-xl font-bold mb-6">£139</p>
+                        <h4 class="text-xl font-medium text-purple-200 mb-2">Goal:</h4>
+                        <p class="text-white text-md mb-4">Start executing real improvements and creating marketing momentum.</p>
+                        <h4 class="text-xl font-medium text-purple-200 mb-2">Ideal for:</h4>
+                        <p class="text-white text-md mb-4">Businesses ready to take action based on analysis.</p>
+                        <h4 class="text-xl font-medium text-purple-200 mb-2">Includes:</h4>
+                        <ul class="text-white text-md list-disc list-inside space-y-1">
+                            <li>1-Hour collaborative session to discuss your brand</li>
+                            <li>Content Plan for 30 Days (blog/social topics & post scheduling)</li>
+                            <li>Professionally written social media content with image/video suggestions</li>
+                            <li>Improved Website Copy Suggestions (based on AI analysis)</li>
+                            <li>Email List Review & Basic customer Lead idea Generation</li>
+                            <li>Performance Tracker</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Service Item 4: Gold Package -->
+                <div class="bg-purple-900 p-8 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 ease-in-out border border-transparent hover:border-purple-500 transform hover:-translate-y-2 hover:scale-102 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-3xl font-semibold text-white mb-2 text-center">Gold Package</h3>
+                        <p class="text-white text-center text-xl font-bold mb-6">£199</p>
+                        <h4 class="text-xl font-medium text-purple-200 mb-2">Goal:</h4>
+                        <p class="text-white text-md mb-4">Deliver full-service marketing execution and growth support.</p>
+                        <h4 class="text-xl font-medium text-purple-200 mb-2">Ideal for:</h4>
+                        <p class="text-white text-md mb-4">Businesses ready for consistent content and marketing automation.</p>
+                        <h4 class="text-xl font-medium text-purple-200 mb-2">Includes:</h4>
+                        <ul class="text-white text-md list-disc list-inside space-y-1">
+                            <li>Content Creation & Scheduling</li>
+                            <li>15 total social media posts across different platforms</li>
+                            <li>Email Marketing Setup</li>
+                            <li>SEO Optimization for website pages or blog posts</li>
+                            <li>Custom Lead Magnet Creation</li>
+                            <li>Monthly Reporting + 1 Strategy Session (AI-generated reports + your insights)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Consolidated Contact Section: Now with direct contact info -->
     <section id="contact" class="bg-gray-900 text-white py-20 text-center rounded-t-3xl shadow-2xl mt-[-5rem] pt-20">
         <div class="container mx-auto px-6">
             <h2 class="text-5xl font-bold mb-12">Connect with CoreDraft Studios</h2>
             
-            <!-- The Light Switch Container -->
-            <div class="light-switch-container mb-12">
-                <!-- Email Half of the switch -->
-                <div id="emailSide" class="switch-half email-half">
-                    <p class="switch-label">Send an Email</p>
+            <div class="contact-info-block mb-12">
+                <div>
+                    <h3 class="text-3xl font-semibold text-white mb-4">Alistair Lechartier</h3>
+                    <div class="flex flex-col items-center md:items-start space-y-2">
+                        <div class="contact-item">
+                            <svg class="icon text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
+                            <a href="mailto:alistair.lechartier1@outlook.com">alistair.lechartier1@outlook.com</a>
+                        </div>
+                        <div class="contact-item">
+                            <!-- New iPhone-style phone icon SVG -->
+                            <svg class="icon text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M7 2a2 2 0 00-2 2v16a2 2 0 002 2h10a2 2 0 002-2V4a2 2 0 00-2-2H7zm0 2h10v16H7V4zm4 17a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
+                            </svg>
+                            <a href="tel:07596395064">07596395064</a>
+                        </div>
+                    </div>
                 </div>
-
-                <!-- Phone Half of the switch -->
-                <div id="phoneSide" class="switch-half phone-half">
-                    <p class="switch-label">Call Me</p>
+                <div>
+                    <h3 class="text-3xl font-semibold text-white mb-4">Joe Dowd</h3>
+                    <div class="flex flex-col items-center md:items-start space-y-2">
+                        <div class="contact-item">
+                            <svg class="icon text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
+                            <a href="mailto:jdowd116@gmail.com">jdowd116@gmail.com</a>
+                        </div>
+                        <div class="contact-item">
+                            <!-- New iPhone-style phone icon SVG -->
+                            <svg class="icon text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M7 2a2 2 0 00-2 2v16a2 2 0 002 2h10a2 2 0 002-2V4a2 2 0 00-2-2H7zm0 2h10v16H7V4zm4 17a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
+                            </svg>
+                            <a href="tel:07399988190">07399988190</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -311,83 +365,5 @@
         </div>
     </section>
 
-    <script>
-        // JavaScript for the interactive Light Switch effect
-        document.addEventListener('DOMContentLoaded', () => {
-            const emailSide = document.getElementById('emailSide');
-            const phoneSide = document.getElementById('phoneSide');
-
-            // Function to handle click and apply states
-            function handleSwitchClick(clickedElement, targetLink) {
-                const otherElement = clickedElement === emailSide ? phoneSide : emailSide;
-
-                // Apply 'pressed' state to the clicked element
-                clickedElement.style.transform = 'translateY(5px)';
-                clickedElement.style.boxShadow = 'inset 0 0 15px rgba(0, 0, 0, 0.4)';
-
-                // Apply 'raised' state to the other element
-                otherElement.style.transform = 'translateY(-5px)'; /* Default raised position */
-                otherElement.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.2)'; /* Default outer shadow */
-
-                // Trigger the email/phone link after a short delay
-                setTimeout(() => {
-                    window.location.href = targetLink;
-                    // Optional: Reset state after navigation attempt (if navigation doesn't happen, e.g., on desktop for tel: link)
-                    // The page will typically navigate away, so explicit reset might not be needed.
-                    // If staying on page:
-                    // emailSide.style.transform = 'translateY(-5px)';
-                    // emailSide.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.2)';
-                    // phoneSide.style.transform = 'translateY(-5px)';
-                    // phoneSide.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.2)';
-                }, 300); // 300 milliseconds delay
-            }
-
-            // Add event listeners for click (and touch tap)
-            emailSide.addEventListener('click', () => {
-                handleSwitchClick(emailSide, 'mailto:alistair.lechartier1@outlook.com');
-            });
-            phoneSide.addEventListener('click', () => {
-                handleSwitchClick(phoneSide, 'tel:07596395064');
-            });
-
-            // Handle hover events for visual feedback
-            emailSide.addEventListener('mouseenter', () => {
-                // Apply hover effect if not already active (pressed)
-                if (!emailSide.classList.contains('is-active')) {
-                    emailSide.style.transform = 'translateY(-10px)';
-                    emailSide.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.3)';
-                }
-            });
-            emailSide.addEventListener('mouseleave', () => {
-                // Reset to default raised state if not active (pressed)
-                if (!emailSide.classList.contains('is-active')) {
-                    emailSide.style.transform = 'translateY(-5px)';
-                    emailSide.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.2)';
-                }
-            });
-
-            phoneSide.addEventListener('mouseenter', () => {
-                // Apply hover effect if not already active (pressed)
-                if (!phoneSide.classList.contains('is-active')) {
-                    phoneSide.style.transform = 'translateY(-10px)';
-                    phoneSide.style.boxShadow = '0 10px 25px rgba(0, 0, 0, 0.3)';
-                }
-            });
-            phoneSide.addEventListener('mouseleave', () => {
-                // Reset to default raised state if not active (pressed)
-                if (!phoneSide.classList.contains('is-active')) {
-                    phoneSide.style.transform = 'translateY(-5px)';
-                    phoneSide.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.2)';
-                }
-            });
-
-            // Initialize both halves to default raised state on page load
-            // Note: Removed 'is-active' class on initial load here
-            emailSide.style.transform = 'translateY(-5px)';
-            emailSide.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.2)';
-            phoneSide.style.transform = 'translateY(-5px)';
-            phoneSide.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.2)';
-        });
-    </script>
 </body>
 </html>
