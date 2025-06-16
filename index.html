@@ -14,7 +14,7 @@
         /* Custom styles for the Playfair Display font for headings and Inter for body */
         body {
             font-family: 'Inter', sans-serif; /* Default body font */
-            padding-top: 64px; /* Space for the fixed header */
+            padding-top: 72px; /* Adjusted space for the slightly taller fixed header */
             background-color: white; /* Overall body background is white */
         }
         /* All headings and the hero text now use the elegant Playfair Display font */
@@ -143,25 +143,43 @@
 </head>
 <body class="text-gray-800">
 
-    <!-- Header Section: Fixed at the top with a subtle shadow -->
-    <header class="bg-white shadow-lg py-4 fixed top-0 left-0 right-0 z-50 rounded-b-xl">
-        <div class="container mx-auto px-4 flex justify-center items-center">
-            <!-- Company Name / Logo - Centered and explicitly uses Playfair Display -->
+    <!-- Header Section with Navigation -->
+    <header class="bg-white shadow-lg fixed top-0 left-0 right-0 z-50 rounded-b-xl">
+        <div class="container mx-auto px-4 flex justify-between items-center py-4">
+            <!-- Company Name / Logo -->
             <a href="#home" class="text-3xl font-bold text-indigo-700 font-['Playfair_Display']">CoreDraft Studios</a>
-            
-            <!-- Mobile Menu Button and Mobile Menu HTML removed -->
+
+            <!-- Desktop Navigation -->
+            <nav class="hidden md:flex space-x-8 items-center">
+                <a href="#about" class="text-gray-600 hover:text-purple-700 font-medium transition duration-300">Expertise</a>
+                <a href="#services" class="text-gray-600 hover:text-purple-700 font-medium transition duration-300">Packages</a>
+                <a href="#why-choose-us" class="text-gray-600 hover:text-purple-700 font-medium transition duration-300">Why Us</a>
+                <a href="#contact" class="bg-purple-600 text-white px-5 py-2 rounded-full hover:bg-purple-700 transition duration-300">Contact Us</a>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-800 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+                </button>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden">
+            <a href="#about" class="block py-2 px-4 text-sm text-gray-600 hover:bg-purple-50">Expertise</a>
+            <a href="#services" class="block py-2 px-4 text-sm text-gray-600 hover:bg-purple-50">Packages</a>
+            <a href="#why-choose-us" class="block py-2 px-4 text-sm text-gray-600 hover:bg-purple-50">Why Us</a>
+            <a href="#contact" class="block py-2 px-4 text-sm text-gray-600 hover:bg-purple-50">Contact Us</a>
         </div>
     </header>
 
-    <!-- Hero Section: Now with a white background and the central purple irregular shape -->
+    <!-- Hero Section -->
     <section id="home" class="hero-background text-white py-24 md:py-40 text-center rounded-b-3xl shadow-2xl flex items-center justify-center z-10">
         <div class="container mx-auto px-6">
-            <!-- The central "cool irregular shape" container -->
             <div class="hero-content-wrapper">
                 <p class="hero-text-font text-3xl md:text-5xl font-extrabold mb-8 max-w-6xl mx-auto leading-tight drop-shadow-md">
                     Human Ingenuity. AI Brilliance. Marketing Mastered.
                 </p>
-                <!-- Call to Action Button -->
                 <a href="#services" class="inline-block bg-white text-purple-700 font-bold py-4 px-10 rounded-full shadow-lg transition duration-300 ease-in-out transform hover:scale-105 hover:bg-gray-100 hover:text-purple-800">
                     Discover Our Services
                 </a>
@@ -169,7 +187,7 @@
         </div>
     </section>
 
-    <!-- What We Do: Our Approach (New Section for basic summary) -->
+    <!-- What We Do: Our Approach -->
     <section id="what-we-do-summary" class="py-20 bg-purple-50 shadow-inner rounded-t-3xl mt-[-5rem] pt-20 shadow-2xl">
         <div class="container mx-auto px-6 max-w-5xl">
             <h2 class="text-5xl font-bold text-center mb-12 text-purple-900">What We Do: Our Approach</h2>
@@ -181,13 +199,13 @@
         </div>
     </section>
 
-    <!-- About Section: UPDATED CONTENT -->
+    <!-- About Section -->
     <section id="about" class="py-20 bg-purple-100 shadow-inner rounded-t-3xl mt-[-5rem] pt-20 shadow-2xl">
         <div class="container mx-auto px-6 max-w-5xl">
             <h2 class="text-5xl font-bold text-center mb-16 text-purple-900">Our Expertise: Engineering Growth, Understanding People.</h2>
             <div class="bg-white p-10 rounded-3xl shadow-2xl border border-gray-100 mb-12">
                 <p class="text-xl text-purple-700 leading-relaxed mb-6">
-                    We bring a unique dual-perspective to marketing, blending the precision of engineering with the insights of psychology. While traditional marketers focus on one or the other, we build powerful marketing systems that are not only efficient and data-driven but also deeply resonant with human behaviour.
+                    We bring a unique dual-perspective to marketing, blending the precision of engineering with the insights of psychology. While traditional marketers focus on one or the other, we build powerful marketing systems that are not only efficient and data-driven but also deeply resonant with human nature.
                 </p>
                 <div class="grid md:grid-cols-2 gap-8">
                     <div>
@@ -207,37 +225,37 @@
         </div>
     </section>
 
-    <!-- Why Choose Us Section (Features): Highlights the benefits of choosing CoreDraft Studios -->
+    <!-- Why Choose Us Section -->
     <section id="why-choose-us" class="py-20 bg-purple-200 shadow-inner rounded-t-3xl mt-[-5rem] pt-20 shadow-2xl">
         <div class="container mx-auto px-6">
             <h2 class="text-5xl font-bold text-center mb-16 text-purple-900">Why Choose CoreDraft Studios?</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 mb-12">
-                <!-- Feature Item 1: Efficiency -->
+                <!-- Feature Item 1 -->
                 <div class="bg-purple-800 p-8 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 ease-in-out border border-transparent hover:border-purple-500 transform hover:-translate-y-2 hover:scale-102">
                     <h3 class="text-2xl font-semibold text-white mb-3 text-center">Unmatched Efficiency</h3>
                     <p class="text-white text-center text-lg">Accelerate your marketing campaigns with AI-powered content generation and optimization, reducing time-to-market significantly.</p>
                 </div>
-                <!-- Feature Item 2: Extremely Competitive Prices (UPDATED) -->
+                <!-- Feature Item 2 -->
                 <div class="bg-purple-800 p-8 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 ease-in-out border border-transparent hover:border-purple-500 transform hover:-translate-y-2 hover:scale-102">
                     <h3 class="text-2xl font-semibold text-white mb-3 text-center">Extremely Competitive Prices</h3>
                     <p class="text-white text-center text-lg">Receive premium, AI-driven marketing solutions at a fraction of the cost of traditional agencies.</p>
                 </div>
-                <!-- Feature Item 3: Data-Driven Performance -->
+                <!-- Feature Item 3 -->
                 <div class="bg-purple-800 p-8 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 ease-in-out border border-transparent hover:border-purple-500 transform hover:-translate-y-2 hover:scale-102">
                     <h3 class="text-2xl font-semibold text-white mb-3 text-center">Data-Driven Performance</h3>
                     <p class="text-white text-center text-lg">Leverage AI to analyze vast datasets, ensuring every marketing decision is backed by intelligent, real-time insights.</p>
                 </div>
-                <!-- Feature Item 4: Scalable Solutions -->
+                <!-- Feature Item 4 -->
                 <div class="bg-purple-800 p-8 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 ease-in-out border border-transparent hover:border-purple-500 transform hover:-translate-y-2 hover:scale-102">
                     <h3 class="text-2xl font-semibold text-white mb-3 text-center">Scalable Solutions</h3>
                     <p class="text-white text-center text-lg">Expand your marketing efforts seamlessly as your business grows, with AI handling the increased demand efficiently.</p>
                 </div>
-                <!-- Feature Item 5: Consistent Brand Voice -->
+                <!-- Feature Item 5 -->
                 <div class="bg-purple-800 p-8 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 ease-in-out border border-transparent hover:border-purple-500 transform hover:-translate-y-2 hover:scale-102">
                     <h3 class="text-2xl font-semibold text-white mb-3 text-center">Consistent Brand Voice</h3>
                     <p class="text-white text-center text-lg">Ensure uniformity in messaging and quality across all your marketing channels, maintaining strong brand identity.</p>
                 </div>
-                <!-- Feature Item 6: Cutting-Edge Innovation -->
+                <!-- Feature Item 6 -->
                 <div class="bg-purple-800 p-8 rounded-xl shadow-xl hover:shadow-2xl transition duration-300 ease-in-out border border-transparent hover:border-purple-500 transform hover:-translate-y-2 hover:scale-102">
                     <h3 class="text-2xl font-semibold text-white mb-3 text-center">Cutting-Edge Innovation</h3>
                     <p class="text-white text-center text-lg">Stay ahead of the competition by utilizing the latest advancements in artificial intelligence for your marketing needs.</p>
@@ -261,7 +279,7 @@
         </div>
     </section>
 
-    <!-- Services Section: Detailed offerings in a clean card layout -->
+    <!-- Services Section -->
     <section id="services" class="py-20 bg-purple-700 shadow-inner rounded-t-3xl mt-[-5rem] pt-20 shadow-2xl">
         <div class="container mx-auto px-6">
             <h2 class="text-5xl font-bold text-center mb-16 text-white">Our AI-Powered Service Packages</h2>
@@ -344,7 +362,7 @@
         </div>
     </section>
 
-    <!-- Consolidated Contact Section: Now with direct contact info -->
+    <!-- Contact Section -->
     <section id="contact" class="py-20 bg-gray-900 text-white text-center rounded-t-3xl shadow-2xl mt-[-5rem] pt-20">
         <div class="container mx-auto px-6">
             <h2 class="text-5xl font-bold mb-12">Connect with CoreDraft Studios</h2>
@@ -358,7 +376,6 @@
                             <a href="mailto:alistair.lechartier1@outlook.com">alistair.lechartier1@outlook.com</a>
                         </div>
                         <div class="contact-item">
-                            <!-- New iPhone-style phone icon SVG -->
                             <svg class="icon text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M7 2a2 2 0 00-2 2v16a2 2 0 002 2h10a2 2 0 002-2V4a2 2 0 00-2-2H7zm0 2h10v16H7V4zm4 17a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
                             </svg>
@@ -374,7 +391,6 @@
                             <a href="mailto:jdowd116@gmail.com">jdowd116@gmail.com</a>
                         </div>
                         <div class="contact-item">
-                            <!-- New iPhone-style phone icon SVG -->
                             <svg class="icon text-white" fill="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd" d="M7 2a2 2 0 00-2 2v16a2 2 0 002 2h10a2 2 0 002-2V4a2 2 0 00-2-2H7zm0 2h10v16H7V4zm4 17a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/>
                             </svg>
@@ -384,12 +400,29 @@
                 </div>
             </div>
 
-            <!-- New closing message -->
             <p class="text-lg text-gray-300 mb-8">We look forward to working with you...</p>
 
             <p class="text-sm text-gray-400">&copy; 2025 CoreDraft Studios. All rights reserved.</p>
         </div>
     </section>
+
+    <!-- JavaScript for Mobile Menu -->
+    <script>
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close the mobile menu when a link is clicked
+        const mobileMenuLinks = mobileMenu.querySelectorAll('a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    </script>
 
 </body>
 </html>
